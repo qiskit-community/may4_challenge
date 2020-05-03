@@ -115,3 +115,11 @@ venv.bak/
 questions/**/circuit_widget_temp.svg
 questions/**/circuit_widget_temp_bs.svg
 questions/**/circuit_widget_temp_qs.svg
+
+# Server
+may4_challenge_server
+test
+.travis*
+requirements*
+questions
+Makefile
