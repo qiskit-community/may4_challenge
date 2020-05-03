@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+ERROR=0
+
+SomeError () {
+  (( ERROR++ ))
+}
+
+trap SomeError ERR
+
+for file in $(git diff --cached --name-only --diff-filter=d | grep -E '\.py$')
+do
+  pycodestyle "$file"
+  mypy "$file"
+done
+
+if [ ${ERROR} -ne 0 ]; then
+  echo
+  echo "Commit has been interrupted: pycodestyle failed on some files."
+  echo "Fix style errors and try again."
+  exit ${ERROR}
+fi
